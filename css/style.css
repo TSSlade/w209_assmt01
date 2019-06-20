@@ -1,0 +1,32 @@
+body {
+    font: 11px sans-serif;
+}
+
+.canvas {
+    background-color: #CAD6F8;
+    stroke: #000;
+    border-color: Green;
+    border-width: 2px;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000000;
+    shape-rendering: crispEdges;
+}
+
+.dot {
+    stroke: #1E08F1;
+    fill: #1E08F1;
+}
+
+p {
+    font-family: 'Fira Code';
+    font-size: 14px;
+}
+
+h1 {
+    font-family: 'Fira Code';
+    font-size: 32px;
+}
