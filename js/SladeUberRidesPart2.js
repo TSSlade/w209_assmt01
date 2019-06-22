@@ -121,7 +121,20 @@ UberRidesVizLib.ScatterPlot = function() {
                                           highlight(d);
                                         })
                     .on("mouseout", function(d, i) {
-                                          restore(d);});
+                                          restore(d);})
+                    .on("click", function(d) {
+                                      console.log("Clicked on " + d.vehicle_make);
+                                      div.transition()
+                                         .duration(200)
+                                         .style("opacity", 0.9);
+                                      div.html("Make: " + d.vehicle_make + "<br/>" +
+                                               "Model: " + d.vehicle_model + "<br/>" +
+                                               "Date: " + d.date_year +
+                                               "/" + d.date_month +
+                                               "/" + d.date_day)
+                                         .style("left", (d3.event.pageX + 10) + "px")
+                                         .style("top", (d3.event.pageY - 28) + "px");});
+
         // Generate the x axis
         svg.append("g")
            .attr("class", "x axis")
@@ -173,6 +186,11 @@ UberRidesVizLib.ScatterPlot = function() {
                       circle.attr("r", "2px")
                             .attr("fill", "black")};
 
+    var show_metadata = function(point) {
+                      console.log("showing metadata for: " + point);
+                      return 
+    }
+
 
     var public = {
       "plot": plot_,
@@ -210,7 +228,12 @@ var make_dict = {
 var parseTimestamp = d3.timeParse("%Y-%m-%Y %I:%M");
 var parseTimeOnly = d3.timeParse("%I:%M");
 
-d3.csv('data/uberRidesPart2.csv',
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+// d3.csv('../data/uberRidesPart2.csv',
+d3.csv('static/data/uberRidesPart2.csv',
         function(error, data) {
           var models = data.map(function(d) {return d.vehicle_model;}),
               makes = data.map(function(d) {return d.vehicle_make;}),
